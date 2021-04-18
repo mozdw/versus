@@ -6,6 +6,7 @@
 
 SceneID startScreen, gameScreen, gameOver;
 
+ObjectID title;
 ObjectID player, enemy, playerEff, enemyEff, bang, frameEff;
 ObjectID startButton, infinityButton, helpButton, screenClicker;
 ObjectID fadeImage, blackScreen;
@@ -110,13 +111,17 @@ void fadeScene() {
 				locateObject(player, gameScreen, 330, 150);
 				locateObject(enemy, gameScreen, 830, 150);
 				hideObject(enemy);
+				if (enemyNum == 5) {
+					setSceneImage(gameScreen, "BG/night.jpg");
+				}
 				std::string enemyStr = "Char/enemy_" + std::to_string(enemyNum) + ".png";
 				const char* enemyFile = enemyStr.c_str();
 				setObjectImage(enemy, enemyFile);
 			}
 			if (nextScene == 4)
 			{
-				locateObject(fadeImage, startScreen, 320, 0);
+				setSceneImage(gameScreen, "BG/noon.jpg");
+				locateObject(fadeImage, startScreen, 0, 0);
 				enterScene(startScreen);
 			}
 			if (nextScene == 5)
@@ -130,6 +135,7 @@ void fadeScene() {
 			}
 			if (nextScene == 6)
 			{
+				setSceneImage(gameScreen, "BG/noon.jpg");
 				hideObject(blackScreen);
 				std::string enemyStr = "Char/enemy_" + std::to_string(rand() % 14 + 8) + ".png";
 				const char* enemyFile = enemyStr.c_str();
@@ -470,9 +476,12 @@ void timerCallback(TimerID timer) {
 		enterScene(gameOver);
 		setTimer(overTimer, 2.0f);
 		startTimer(overTimer);
-		std::string scoreStr = "이번엔 " + std::to_string(score) + "명 쓰러뜨렸습니다!\n더 높은 기록을 노려봐요!";
-		const char* scoreChar = scoreStr.c_str();
-		showMessage(scoreChar);
+		if (enemyNum == 7) {
+			std::string scoreStr = "이번엔 " + std::to_string(score) + "명 쓰러뜨렸습니다!\n더 높은 기록을 노려봐요!";
+			const char* scoreChar = scoreStr.c_str();
+			showMessage(scoreChar);
+		}
+		
 	}
 	if (timer == overTimer) {
 		dialNum = 1;
@@ -779,17 +788,23 @@ int main() {
 	gameScreen = createScene("", "BG/noon.jpg");
 	gameOver = createScene("", "BG/gameOver.png");
 
+	title = createObject("BG/title.png");
+	locateObject(title, startScreen, 200, 100);
+	scaleObject(title, 1.3);
+	showObject(title);
 
 	startButton = createObject("UI/normal.png");
-	locateObject(startButton, startScreen, 830, 400);
+	locateObject(startButton, startScreen, 210, 50);
 	showObject(startButton);
 
 	infinityButton = createObject("UI/infinity.png");
-	locateObject(infinityButton, startScreen, 830, 300);
+	locateObject(infinityButton, startScreen, 510, 50);
 
 	helpButton = createObject("UI/help.png");
-	locateObject(helpButton, startScreen, 830, 200);
+	locateObject(helpButton, startScreen, 810, 50);
 	showObject(helpButton);
+
+	
 
 
 	player = createObject("Char/char.png");
@@ -811,7 +826,7 @@ int main() {
 
 
 	fadeImage = createObject("BG/fade0.png");
-	locateObject(fadeImage, startScreen, 320, 0);
+	locateObject(fadeImage, startScreen, 0, 0);
 
 	fadeTimer = createTimer(0.07f);
 
