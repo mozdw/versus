@@ -12,7 +12,7 @@
 
 리소스 출처는 아래와 같습니다.
 
-배경: https://winddorf.net 
+배경 이미지: http://moonwind.pw
 
 사운드: ogg 파일-https://maou.audio/  mp3 파일-https://soundeffect-lab.info/ 
         
