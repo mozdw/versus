@@ -14,9 +14,7 @@
 
 배경: https://winddorf.net 
 
-사운드: ogg 파일-https://maou.audio/ 
-
-        mp3 파일-https://soundeffect-lab.info/ 
+사운드: ogg 파일-https://maou.audio/  mp3 파일-https://soundeffect-lab.info/ 
         
 버튼/대화창 이미지: https://kopacurve.blog.fc2.com/ 
 
